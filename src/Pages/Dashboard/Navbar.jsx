@@ -14,7 +14,7 @@ const Navbar = () => {
     <nav className="bg-red-400 text-white px-6 py-4 shadow-md">
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo */}
-        <h1 className="text-2xl font-bold">Tasker</h1>
+        <h1 className="text-2xl font-bold">Your Task</h1>
 
         {/* Buttons */}
         <div className="flex gap-4">
