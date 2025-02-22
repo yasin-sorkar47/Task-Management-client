@@ -206,7 +206,7 @@ const Task = () => {
                 .map((task) => (
                   <li
                     key={task._id}
-                    className="mb-2 flex flex-col items-start rounded-lg bg-gray-100 p-3"
+                    className="mb-2 flex flex-col items-start rounded-lg bg-red-100 p-3"
                   >
                     {editingId === task._id ? (
                       <>
