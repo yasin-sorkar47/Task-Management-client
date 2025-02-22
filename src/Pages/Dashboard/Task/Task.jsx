@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
 import { io } from "socket.io-client";
+import Swal from "sweetalert2";
 
 const socket = io("https://job-task-server-two-lime.vercel.app");
 
@@ -64,12 +65,16 @@ const Task = () => {
     };
 
     try {
-      const result = await axios.post(
+      await axios.post(
         "https://job-task-server-two-lime.vercel.app/task",
         task
       );
-      console.log(result);
       refetch();
+      Swal.fire({
+        title: "Good job!",
+        text: "You have added the Task!",
+        icon: "success",
+      });
     } catch (error) {
       console.log("Adding Problem", error);
     }
@@ -79,16 +84,32 @@ const Task = () => {
   };
 
   // removing a task
-  const handleDeleteTask = async (id) => {
-    try {
-      const result = await axios.delete(
-        `https://job-task-server-two-lime.vercel.app/task/${id}`
-      );
-      console.log(result);
-      refetch();
-    } catch (error) {
-      console.log("Deleting error", error);
-    }
+  const handleDeleteTask = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await axios.delete(
+            `https://job-task-server-two-lime.vercel.app/task/${id}`
+          );
+          refetch();
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your Task has been deleted.",
+            icon: "success",
+          });
+        } catch (error) {
+          console.log("Deleting error", error);
+        }
+      }
+    });
   };
 
   // Turn on edit mode: Set all data in the current task to editing state
@@ -109,12 +130,18 @@ const Task = () => {
     };
 
     try {
-      const result = await axios.patch(
+      await axios.patch(
         `https://job-task-server-two-lime.vercel.app/task/${id}`,
         updatedTask
       );
-      console.log(result);
+
       refetch();
+
+      Swal.fire({
+        title: "Good job!",
+        text: "You Task has been updated!",
+        icon: "success",
+      });
 
       // close editing mode:
       setEditingId(null);
