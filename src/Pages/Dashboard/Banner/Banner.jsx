@@ -18,7 +18,7 @@ const Banner = () => {
         {/* Text Section */}
         <div className="text-center md:text-left">
           <h1 className="mb-4 text-red-400 text-4xl font-bold lg:text-5xl">
-            Management Your Task
+            Manage Your Task
           </h1>
           <p className="mb-6 text-lg text-gray-600">
             Uniquely deliver alternative intellectual capital whereas corporate

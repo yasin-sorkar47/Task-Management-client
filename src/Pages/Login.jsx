@@ -1,6 +1,6 @@
+import axios from "axios";
 import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
-import axios from "axios";
 
 const Login = () => {
   const { user, setUser, googleSignIn } = useContext(AuthContext);
@@ -17,7 +17,10 @@ const Login = () => {
         userEmail: user?.email,
         displayName: user?.displayName,
       };
-      const res = await axios.post("http://localhost:5000/users", userInfo);
+      const res = await axios.post(
+        "https://job-task-server-two-lime.vercel.app/users",
+        userInfo
+      );
       console.log(res);
     } catch (error) {
       console.error("Google Sign-In failed:", error.message);
